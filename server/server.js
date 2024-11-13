@@ -53,7 +53,7 @@ app.get('/api/servertime', (req, res) => {
     res.status(200).json(servertime);
 })
 
-app.post('/api/send_telemetry_data', (req, res) => {
+app.post('/api/send_telemetry_data', async(req, res) => {
     const telemetryData = req.body;
 
     // const allKeysPresent = telemetryKeys.every(key => key in telemetryData);
@@ -96,7 +96,9 @@ app.post('/api/send_telemetry_data', (req, res) => {
                     return res.status(500).json({ error: `Failed to store combined telemetry data in Redis` });
                 }
             });
+            res.status(200).json(combinedTelemetryData);
         });
+
         
         console.log(`${teamKey} stored`);
 
