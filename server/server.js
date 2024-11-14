@@ -95,8 +95,8 @@ app.post('/api/send_telemetry_data', async(req, res) => {
                     console.error(`Redis set combined telemetry error:`, err);
                     return res.status(500).json({ error: `Failed to store combined telemetry data in Redis` });
                 }
+                res.status(200).json(combinedTelemetryData);
             });
-            res.status(200).json(combinedTelemetryData);
         });
 
         
